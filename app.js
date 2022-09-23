@@ -16,7 +16,7 @@ app.get("/api/weather", (req, res) => {
   const endPoint = process.env.WEATHER_API_URL;
   const appId = process.env.WEATHER_API_ID;
   const { cityName, units } = req.query;
-  const unitMeasurement = units ? units : "metric";
+  const unitMeasurement = units || "metric";
   const params = `q=${cityName}&units=${unitMeasurement}&appId=${appId}`;
   const weatherUrl = `${endPoint}weather?${params}`;
   const forecastUrl = `${endPoint}forecast?${params}`;
