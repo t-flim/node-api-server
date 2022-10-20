@@ -12,6 +12,25 @@ app.use(
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// random-quote-api
+app.get("/api/random-quote", (req, res) => {
+  const url = "https://quotes15.p.rapidapi.com/quotes/random/";
+
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": process.env.X_RAPIDAPI_KEY,
+      "X-RapidAPI-Host": process.env.X_RAPIDAPI_HOST,
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((data) => res.send(data))
+    .catch((err) => res.send(err));
+});
+
+// weather-api
 app.get("/api/weather", (req, res) => {
   const endPoint = process.env.WEATHER_API_URL;
   const appId = process.env.WEATHER_API_ID;
@@ -37,7 +56,7 @@ app.get("/api/weather", (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      console.log(err);
+      res.send(err);
     });
 });
 
