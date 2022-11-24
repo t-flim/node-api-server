@@ -30,6 +30,19 @@ app.get("/api/random-quote", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+
+// random-user-api
+app.get("/api/user", (req, res) => {
+  const size = req.query.size || 1
+  const url = `${process.env.RANDOM_DATA_API_URL}users?size=${size}`;
+
+  fetch(url, {method: "GET"})
+    .then((res) => res.json())
+    .then((data) => res.send(data))
+    .catch((err) => res.send(err));
+});
+
+
 // weather-api
 app.get("/api/weather", (req, res) => {
   const endPoint = process.env.WEATHER_API_URL;
